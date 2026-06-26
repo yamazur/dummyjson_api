@@ -6,17 +6,26 @@ class AuthClient:
 
     @staticmethod
     def login(username: str, password: str):
-        return requests.post(
-            AuthEndpoint.LOGIN,
-            json={
-                "username": username,
-                "password": password
-            }
-        )
+        url = AuthEndpoint.LOGIN
+        payload = {
+            "username": username,
+            "password": password
+        }
+        headers = {"Content-Type": "application/json"}
+        return requests.post(url, json=payload, headers=headers)
 
     @staticmethod
     def get_me(token: str):
-        return requests.get(
-            AuthEndpoint.ME,
-            headers={"Authorization": f"Bearer {token}"}
-        )
+        url = AuthEndpoint.ME
+        headers = {"Authorization": f"Bearer {token}"}
+        return requests.get(url, headers=headers)
+
+    @staticmethod
+    def refresh(refresh_token: str, expires_in_mins: int = 60):
+        url = AuthEndpoint.REFRESH
+        payload = {
+            "refreshToken": refresh_token,
+            "expiresInMins": expires_in_mins
+        }
+        headers = {"Content-Type": "application/json"}
+        return requests.post(url, json=payload, headers=headers)

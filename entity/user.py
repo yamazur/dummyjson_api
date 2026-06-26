@@ -1,10 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
 
-class LoginRequest(BaseModel):
-    username: str
-    password: str
-    expiresInMins: Optional[int] = 60
 
 class LoginResponse(BaseModel):
     accessToken: str
