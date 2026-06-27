@@ -13,5 +13,3 @@ def login_response():
 def get_me_response(login_response):
     response = AuthClient.get_me(login_response.accessToken)
     return User(**response.json())
-
-@pytest.fixture

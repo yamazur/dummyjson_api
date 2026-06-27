@@ -11,7 +11,6 @@ class CartProductDetails(BaseModel):
     quantity: int
     total: float
     discountPercentage: float
-    discountedTotal: float
     thumbnail: str
 
 class Cart(BaseModel):
@@ -22,11 +21,10 @@ class Cart(BaseModel):
     userId: int
     totalProducts: int
     totalQuantity: int
+    isDeleted: bool = False
 
 class CartListResponse(BaseModel):
     carts: list[Cart]
     total: int
     skip: int
     limit: int
-
-

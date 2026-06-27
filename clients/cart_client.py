@@ -1,7 +1,7 @@
 import requests
 
 from endpoints.cart_endpoints import CartEndpoint
-from entity.cart import CartProductRequest
+from entity.cart import CartProductPositions
 
 
 class CartClient:
@@ -17,7 +17,7 @@ class CartClient:
         return requests.get(url)
 
     @staticmethod
-    def post_cart(user_id: int, products: list[CartProductRequest]):
+    def post_cart(user_id: int, products: list[CartProductPositions]):
         url = CartEndpoint.POST_CART
         payload = {
             "userId": user_id,
@@ -31,7 +31,7 @@ class CartClient:
         url = CartEndpoint.PUT_CART+f"{cart_id}"
         payload = {
             "merge": merge,
-            "products": products
+            "products": [product.model_dump() for product in products]
         }
         headers = {"Content-Type": "application/json"}
         return requests.put(url, json=payload, headers=headers)

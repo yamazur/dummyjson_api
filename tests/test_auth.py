@@ -2,7 +2,7 @@ import allure
 
 import config.credentials as credentials
 from clients.auth_client import AuthClient
-from entity.user import LoginResponse, User
+from entity.user import LoginResponse
 
 
 class TestAuth:
